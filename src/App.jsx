@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     fetchRate(selectedCurrency).then(({ rates }) => setResponse(rates));
-  }, []);
+  }, [selectedCurrency, selectedTargetCurrency, money]);
 
   const onSubmitHandler = () => {
     setExchangedMoney(response[selectedTargetCurrency] * money);
