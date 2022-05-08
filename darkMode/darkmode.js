@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 
 export const useDarkMode = () => {
-  const [isDarkMode, setIsDarkMode] = useState(
-    () => window.localStorage.theme === "dark"
-  );
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const html = window.document.documentElement;
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
 
-    const prevTheme = isDarkMode ? "light" : "dark";
-    html.classList.remove(prevTheme);
-
-    const nextTheme = isDarkMode ? "dark" : "light";
-    html.classList.add(nextTheme);
-
-    localStorage.setItem("theme", nextTheme);
-  }, [isDarkMode]);
-
-  return [isDarkMode, toggleDarkMode];
+  useEffect(() => {
+    const json = localStorage.getItem("sire-dark-mode");
+    const currentMode = JSON.parse(json);
+    if (currentMode) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, []);
 };
