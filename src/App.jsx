@@ -40,11 +40,11 @@ function App() {
   // };
 
   return (
-    <div className='flex justify-center items-center h-screen flex-col text-2xl'>
+    <div className='flex justify-center items-center h-screen flex-col text-2xl dark:bg-slate-900'>
       <span className='p-5 text-bold text-8xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
         Currency Exchanger
       </span>
-      <p className='text-2xl my-5'>
+      <p className='text-2xl my-5 dark:text-white'>
         Select the currency that you want to exchange
       </p>
       <div className='flex flex-row space-x-5'>
@@ -201,12 +201,12 @@ function App() {
         />
       </div>
       <button
-        className='mt-5 text-xl text-violet-500 bg-violet-100 hover:bg-violet-200 py-3 px-7 rounded-lg'
+        className='mt-5 text-xl text-violet-500 bg-violet-100 hover:bg-violet-200 py-3 px-7 rounded-lg dark:text-violet-100 dark:bg-violet-400 dark:hover:bg-violet-500'
         onClick={onSubmitHandler}
       >
         Exchange!
       </button>
-      <div className='text-7xl font-extrabold mt-10'>
+      <div className='text-7xl font-extrabold mt-10 dark:text-white'>
         {Math.round(exchangedMoney * 100) / 100}
       </div>
     </div>
