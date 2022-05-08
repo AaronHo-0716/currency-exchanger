@@ -1,11 +1,13 @@
 import "./index.css";
 import supportedCurrencies from "./rates/supported-currencies.json";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useLayoutEffect } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import {
   CheckIcon,
   SelectorIcon,
   ArrowRightIcon,
+  MoonIcon,
+  SunIcon,
 } from "@heroicons/react/solid";
 import fetchRate from "./api/fetchRate";
 
@@ -16,6 +18,8 @@ function App() {
   const [response, setResponse] = useState();
   const [money, setMoney] = useState();
   const [query, setQuery] = useState("");
+
+  const [darkMode, setDarkMode] = useState(false);
 
   const filterCurrencies =
     query === ""
@@ -31,6 +35,24 @@ function App() {
     fetchRate(selectedCurrency).then(({ rates }) => setResponse(rates));
   }, [selectedCurrency, selectedTargetCurrency, money]);
 
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  useEffect(() => {
+    const json = localStorage.getItem("sire-dark-mode");
+    const currentMode = JSON.parse(json);
+    if (currentMode) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, []);
+
   const onSubmitHandler = () => {
     setExchangedMoney(response[selectedTargetCurrency] * money);
   };
@@ -40,7 +62,17 @@ function App() {
   // };
 
   return (
-    <div className='flex justify-center items-center h-screen flex-col text-2xl dark:bg-slate-900'>
+    <div className='relative flex justify-center items-center h-screen flex-col text-2xl dark:bg-slate-900'>
+      <button
+        className='absolute right-0 top-0 m-5'
+        onClick={() => setDarkMode(!darkMode)}
+      >
+        {darkMode ? (
+          <SunIcon className='w-10 h-10 text-white' />
+        ) : (
+          <MoonIcon className='w-10 h-10' />
+        )}
+      </button>
       <span className='p-5 text-bold text-8xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
         Currency Exchanger
       </span>
