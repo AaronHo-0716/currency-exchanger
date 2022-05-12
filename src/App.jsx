@@ -73,10 +73,10 @@ function App() {
           <MoonIcon className='w-10 h-10' />
         )}
       </button>
-      <span className='p-5 text-bold text-8xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
+      <span className='p-5 text-bold text-4xl lg:text-8xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
         Currency Exchanger
       </span>
-      <p className='text-2xl my-5 dark:text-white'>
+      <p className=' text-lg lg:text-2xl  lg:my-5 dark:text-white'>
         Select the currency that you want to exchange
       </p>
       <div className='flex flex-row space-x-5'>
